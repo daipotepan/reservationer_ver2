@@ -1,0 +1,56 @@
+table th {
+  background-color: #fbc25b;
+  padding: 10px 20px;
+}
+
+table td {
+  background-color: #f9ecd5;
+  padding: 10px 20px;
+}
+
+.notice {
+  background-color: #ccf;
+  padding: 5px;
+}
+
+#dropdown{
+  display: none;
+}
+
+header {
+  display: flex;
+  text-align: center;
+  align-items: center;
+}
+
+header img {
+  height: 50px;
+  width: auto;
+  padding: 10px;
+  margin: 0;
+}
+
+header p {
+  padding: 10px;
+  margin: 0;
+}
+
+header {
+  height: 60px;
+}
+
+.hidden_dropdown{
+  display: none;
+}
+
+
+.dropdown_active {
+  display: block;
+  z-index: 2;
+}
+
+.dropdown_active ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}

@@ -1,0 +1,27 @@
+<%= render "shared/dropdown" %>
+
+<h3>施設詳細</h3>
+
+<%= render "shared/current_user" %>
+
+<table>
+  <thead>
+    <tr>
+      <th>施設画像</th>
+      <th>施設名</th>
+      <th>紹介文</th>
+      <th>宿泊料金（/日）</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td><img><%= @room.room_img %></img></td>
+      <td><%= @room.name %></td>
+      <td><%= @room.introduction %></td>
+      <td><%= @room.payment_amount %></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><%= link_to "前のページに戻る" request.referer %></p>

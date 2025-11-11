@@ -1,0 +1,36 @@
+<%= render "shared/dropdown" %>
+<%= render "shared/current_user" %>
+
+<h3>予約ページ</h3>
+
+
+<%= render "shared/error", obj: @reservation %>
+
+<%= form_with model: @reservation do |f| %>
+  <table>
+  
+    <tr>
+      <th><%= f.label :checkin_date, "チェックイン日" %></th>
+      <td><%= f.date_field :checkin_date %></td>
+    </tr>
+
+    <tr>
+      <th><%= f.label :checkout_date, "チェックアウト日" %></th>
+      <td><%= f.date_field :checkout_date %></td>
+    </tr>
+
+    <tr>
+      <th><%= f.label :number_of_people, "人数" %></th>
+      <td><%= f.text_field :number_of_people %></td>
+    </tr>
+
+  </table>
+
+  <div>
+    <ul>
+      <li><%= f.submit "予約完了する" %></li>
+      <li><%= link_to "ログイン画面へ", users_login_path %></li>
+    </ul>
+  </div>
+
+<% end %>

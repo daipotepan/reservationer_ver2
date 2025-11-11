@@ -1,0 +1,32 @@
+<%= render "shared/dropdown" %>
+<%= render "shared/current_user" %>
+
+<h3>アカウント情報編集</h3>
+
+
+<%= form_with model: @user do |f| %>
+  <table>
+    <tr>
+      <th><%= f.label :email, "メールアドレス" %></th>
+      <td><%= f.email_field :email %></td>
+    </tr>
+
+    <tr>
+      <th><%= f.label :password, "パスワード" %></th>
+      <td><%= f.password_field :password %></td>
+    </tr>
+
+    <tr>
+      <th><%= f.label :conf_password, "確認用パスワード" %></th>
+      <td><%= f.password_field :conf_password %></td>
+    </tr>
+  </table>
+
+  <div>
+    <ul>
+      <li><%= f.submit "編集完了する" %></li>
+      li><%= link_to "ユーザー情報ページに戻る", users_path %></li>
+    </ul>
+  </div>
+
+<% end %>

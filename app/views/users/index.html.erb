@@ -1,0 +1,27 @@
+<%= render "shared/dropdown" %>
+<%= render "shared/current_user" %>
+
+<h3>ユーザー情報一覧</h3>
+
+
+
+<table>
+  <thead>
+    <tr>
+      <th>メールアドレス</th>
+      <th>パスワード</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td><%= @user.email%></td>
+      <td>
+        <%= @user.password.size.times do %>
+          <% puts "*" %>
+        <% end %>
+      </td>
+  </tbody>
+</table>
+
+<p><%= link_to "宿登録はこちら", new_room_path %></p>

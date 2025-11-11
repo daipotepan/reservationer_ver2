@@ -1,0 +1,34 @@
+<%= render "shared/dropdown" %>
+<%= render "shared/current_user" %>
+
+<h3>予約ページ一覧</h3>
+
+
+
+<table>
+  <thead>
+    <tr>
+      <th>施設画像</th>
+      <th>施設名</th>
+      <th>紹介文</th>
+      <th>合計料金</th>
+      <th>チェックイン日</th>
+      <th>チェックアウト日</th>
+      <th>予約確定日時</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rooms.each do |room| %>
+      <tr>
+        <td><img><%= room.room_img %></td>
+        <td><%= room.name %></td>
+        <td><%= room.introduction %></td>
+        <td><%= reservation.number_of_people * reservation.payment_amount %></td>
+        <td><%= reservation.checkin_date.to_fs(:date_jp) %></td>
+        <td><%= reservation.checkout_date.to_fs(:date_jp) %></td>
+        <td><%= reservation.created_at.to_fs(:date_jp) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

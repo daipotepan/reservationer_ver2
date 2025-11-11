@@ -1,0 +1,36 @@
+<%= render "shared/dropdown" %>
+<%= render "shared/current_user" %>
+
+<h3>予約できる施設一覧</h3>
+
+
+
+<table>
+  <thead>
+    <tr>
+      <th>施設画像</th>
+      <th>施設名</th>
+      <th>紹介文</th>
+      <th>住所</th>
+      <th>宿泊料金</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rooms.each do |room| %>
+      <tr>
+        <td><img><%= room.room_img %></td>
+        <td><%= room.name %></td>
+        <td><%= room.introduction %></td>
+        <td><%= room.address %></td>
+        <td><%= room.payment_amount %></td>
+        <td>
+          <%= link_to "詳細", room %>
+        </td>
+        <td>
+          <%= link_to "予約する", new_reservation_path %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
