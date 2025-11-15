@@ -12,29 +12,54 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   root "reservations#index"
+
+  get "index/users"
+
+  get "new/users"
+  post "create/users"
+
+  get "login/users"
+  post "login/users"
+
+  delete "logout/users"
+
+  get "edit_account/users"
+  patch "edit_account/users"
+
+  get "edit_profile/users"
+  patch "edit_profile/users"
+
+  patch "update_account/users"
+
+  patch "update_profile/users"
+
+
+
+  get "index/rooms"
+
+  get "new/rooms"
+  post "create/rooms"
+
+  get "show/rooms"
+
+
+
+  get "index/reservations"
+
+  get "new/reservations"
   
-  resources :users do
-    collection do
-      get "login"
-      post "login"
-      delete "logout"
-      get "edit_account"
-      patch "edit_account"
+  post "create/reservations"
 
-      get "edit_profile"
-      patch "edit_profile"
+  get "show/reservations"
 
-      patch "update_account"
+  get "conf/reservations"
+  post "conf/reservations"
 
-      patch "update_profile"
-    end
-  end
 
-  resources :rooms
 
-  resources :reservations do
-    collection do
-      post "conf"
-    end
-  end
+  get "current_user/applications"
+
+  get "search_address/applications"
+
+  get "search_room_info/applications"
 end

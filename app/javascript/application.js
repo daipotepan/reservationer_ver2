@@ -1,21 +1,25 @@
 import "@hotwired/turbo-rails"
 import "controllers"
-import $ from "jquery"
 
 document.addEventListener("turbo:load", () => {
-  // アイコンクリックでドロップダウン表示・非表示切り替え
-  $("#icon").off("click").on("click", function() {
-    $("#dropdown").toggleClass("dropdown_hidden");
+  const icon = document.getElementById("icon");
+  const dropdown = document.getElementById("dropdown");
+  const logout = document.getElementById("logout");
+  const header = document.querySelector("header");
+
+  if (!icon || !dropdown || !logout) return;
+
+  icon.addEventListener("click", (event) => {
+    dropdown.classList.toggle("dropdown_hidden");
   });
 
-  // ドロップダウンのログアウトクリックで閉じる
-  $("#logout").off("click").on("click", function() {
-    $("#dropdown").addClass("dropdown_hidden");
+  logout.addEventListener("click", () => {
+    dropdown.classList.add("dropdown_hidden");
   });
 
-  $(document).on("click", function(event) {
-    if (!$(event.target).closest("header").length) {
-      $("#dropdown").addClass("dropdown_hidden");
+  document.addEventListener("click", (event) => {
+    if (!header.contains(event.target)) {
+      dropdown.classList.add("dropdown_hidden");
     }
   });
 });

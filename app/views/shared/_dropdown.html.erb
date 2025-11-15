@@ -1,6 +1,6 @@
-<div id = "dropdown" class="hidden_dropdown">
+<div id = "dropdown" class="dropdown_hidden">
   <ul>
-    <li><%= link_to "アカウントページ", users_path %></li>
+    <li><%= link_to "アカウントページ", index_users_path %></li>
     <li><%= link_to "アカウント情報編集", edit_account_users_path %></li>
     <li><%= link_to "プロフィール情報編集", edit_profile_users_path %></li>
     <div id="logout"><li><%= link_to "ログアウト", logout_users_path, data: {turbo_method: :delete, confirm: "ログアウトしますか？" } %></li></div>
