@@ -2,7 +2,7 @@
 
 <%= render "shared/error", obj: @user %>
 
-<%= form_with model: @user do |f| %>
+<%= form_with model: @user, url: create_users_path do |f| %>
   <table>
     <tr>
       <th><%= f.label :icon, "アイコン" %></th>

@@ -13,47 +13,44 @@ Rails.application.routes.draw do
   # root "posts#index"
   root "reservations#index"
 
-  get "index/users"
+  get "index/users",  to: "users#index"
 
-  get "new/users"
-  post "create/users"
+  get  "new/users",    to: "users#new"
+  post "create/users", to: "users#create"
 
-  get "login/users"
-  post "login/users"
+  get  "login/users",  to: "users#login"
+  post "login/users",  to: "users#login"
 
-  delete "logout/users"
+  delete "logout/users", to: "users#logout"
 
-  get "edit_account/users"
-  patch "edit_account/users"
+  get  "edit_account/users", to: "users#edit_account"
+  patch "edit_account/users", to: "users#update_account"
 
-  get "edit_profile/users"
-  patch "edit_profile/users"
-
-  patch "update_account/users"
-
-  patch "update_profile/users"
+  get  "edit_profile/users", to: "users#edit_profile"
+  patch "edit_profile/users", to: "users#update_profile"
 
 
 
-  get "index/rooms"
 
-  get "new/rooms"
-  post "create/rooms"
+  get "index/rooms", to: "rooms#index"
 
-  get "show/rooms"
+  get "new/rooms", to: "rooms#new"
+  post "create/rooms", to: "rooms#create"
+
+  get "show/rooms", to: "rooms#show"
 
 
 
-  get "index/reservations"
+  get "index/reservations", to: "reservations#index"
 
-  get "new/reservations"
+  get "new/reservations", to: "reservations#new"
   
-  post "create/reservations"
+  post "create/reservations", to: "reservations#create"
 
-  get "show/reservations"
+  get "show/reservations", to: "reservations#show"
 
-  get "conf/reservations"
-  post "conf/reservations"
+  get "conf/reservations", to: "reservations#conf"
+  post "conf/reservations", to: "reservations#conf"
 
 
 
