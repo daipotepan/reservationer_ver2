@@ -10,8 +10,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params.require(:user).permit(:name, :email, :password, :conf_password, :icon, :introduction))
     if @user.save
+      session[:id] = @user.id
       flash[:notice] = "登録が完了しました。ログインしてください。"
-      redirect_to login_users_path
+      redirect_to reservations_path
     else
       flash[:alert] = "ユーザー登録に失敗しました。"
       render :new, status: :unprocessable_entity
