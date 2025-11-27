@@ -1,9 +1,13 @@
 <header>
-  <% if current_user %>
-    <div id="icon"><%= image_tag current_user.icon%></div>
-    <p><%= current_user.name %></p>
-  <% else %>
-    <p><%= link_to "ログイン", login_users_path %></p>
-    <p><%= link_to "新規登録", new_users_path %></p>
-  <% end %>
+  <div class="current-user">
+    <% if current_user %>
+      <div id="icon" class="user-icon"><%= image_tag current_user.icon %></div>
+      <p class="user-name"><%= current_user.name %></p>
+    <% else %>
+      <div class="auth-links">
+        <p><%= link_to "ログイン", login_users_path %></p>
+        <p><%= link_to "新規登録", new_users_path %></p>
+      </div>
+    <% end %>
+  </div>
 </header>

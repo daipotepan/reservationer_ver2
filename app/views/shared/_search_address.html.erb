@@ -1,14 +1,16 @@
-<%= form_with url: search_address_applications_path, scope: :room, local: true do |f| %>
-  <table>
-    <tr>
-      <th><%= f.label :address, "探したいエリア" %></th>
-      <td><%= f.text_field :address %></td>
-    </tr>
-  </table>
+<div class="search-address">
+  <%= form_with url: search_address_applications_path, scope: :room, local: true do |f| %>
+    <table>
+      <tr>
+        <th><%= f.label :address, "探したいエリア" %></th>
+        <td><%= f.text_field :address %></td>
+      </tr>
+    </table>
 
-  <div>
-    <ul>
-      <li><%= f.submit "検索する" %></li>
-    </ul>
-  </div>
-<% end %>
+    <div class="search-actions">
+      <ul>
+        <li><%= f.submit "検索する" %></li>
+      </ul>
+    </div>
+  <% end %>
+</div>

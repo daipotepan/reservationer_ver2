@@ -59,4 +59,6 @@ Rails.application.routes.draw do
   get "search_address/applications"
 
   get "search_room_info/applications"
+
+  resources :reservations
 end
