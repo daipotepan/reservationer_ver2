@@ -24,4 +24,4 @@
   </tbody>
 </table>
 
-<p><%= link_to "前のページに戻る" request.referer %></p>
+<p><%= link_to "前のページに戻る" (request.referer || root_path)%></p>

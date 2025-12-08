@@ -14,4 +14,7 @@ class User < ApplicationRecord
       errors.add("パスワードが一致しません")
     end
   end
+
+  has_many :rooms, dependent: :nullify
+  has_many :reservations
 end

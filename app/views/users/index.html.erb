@@ -17,9 +17,7 @@
     <tr>
       <td><%= @user.email%></td>
       <td>
-        <%= @user.password.size.times do %>
-          <% puts "*" %>
-        <% end %>
+        <%= "*" * (@user.password.to_s.length) %>
       </td>
   </tbody>
 </table>

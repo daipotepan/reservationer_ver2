@@ -29,7 +29,8 @@ Rails.application.routes.draw do
   get  "edit_profile/users", to: "users#edit_profile"
   patch "edit_profile/users", to: "users#update_profile"
 
-
+  patch "update_account/users", to: "users#update_account"
+  patch "update_profile/users", to: "users#update_profile"
 
 
   get "index/rooms", to: "rooms#index"
@@ -61,4 +62,6 @@ Rails.application.routes.draw do
   get "search_room_info/applications"
 
   resources :reservations
+  resources :rooms
+  resources :users
 end

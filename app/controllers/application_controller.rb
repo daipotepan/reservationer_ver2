@@ -3,8 +3,6 @@ class ApplicationController < ActionController::Base
   allow_browser versions: :modern
 
   helper_method :current_user
-  helper_method :search_address
-  helper_method :search_room_info
 
   def current_user
     @current_user ||= User.find_by(id: session[:id])

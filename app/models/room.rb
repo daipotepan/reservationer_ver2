@@ -4,4 +4,7 @@ class Room < ApplicationRecord
   validates :introduction, presence: true
   validates :payment_amount, presence: true, numericality: { greater_than_or_equal_to: 1 }
   validates :address, presence: true
+
+  belongs_to :user, optional: true
+  has_many :reservations
 end

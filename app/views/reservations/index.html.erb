@@ -9,16 +9,16 @@
 
 
 <table class="styled-table">
-  <thead>
-    <tr>
-      <th>施設画像</th>
-      <th>施設名</th>
-      <th>紹介文</th>
-      <th>住所</th>
-      <th>宿泊料金</th>
-    </tr>
-  </thead>
   <% if @rooms.present? %>
+    <thead>
+      <tr>
+        <th>施設画像</th>
+        <th>施設名</th>
+        <th>紹介文</th>
+        <th>住所</th>
+        <th>宿泊料金</th>
+      </tr>
+    </thead>
     <tbody>
       <% @rooms.each do |room| %>
         <tr>

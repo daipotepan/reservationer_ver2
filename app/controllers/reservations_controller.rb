@@ -22,19 +22,21 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.new
   end
 
-  def conf(reservation)
+  def conf(reservation, room_id = nil)
     @conf_reservation = reservation
     @room_payment_amount = Room.find_by(id: params[:id]).payment_amount
   end
 
   def create
-    @reservation = Reservation.new(params.require(:reservation).permit(:checkin_date, :checkout_date, :number_of_people))
-    conf(@reservation)
+    permitted = params.require(:reservation).permit(:checkin_date, :checkout_date, :number_of_people, :room_id)
+    @reservation = Reservation.new(permitted)
+    room_id = permitted[:room_id] || params[:room_id]
+    @reservation.room_id = room_id if room_id.present?
+    conf(@reservation, room_id)
 
     if @reservation.save
       flash[:notice] = "予約完了しました"
       redirect_to reservations_path
-
     else
       flash[:notice] = "予約に失敗しました。"
       render "new", status: :unprocessable_entity
@@ -49,18 +51,14 @@ def search_address()
 
     areas.each do |area|
       if input_address.include?(area)
-        @search_results = Room.where("address LIKE ?", "%#{area}%")
-      break
+        return @search_results = Room.where("address LIKE ?", "%#{area}%")
       end
     end   
-
-    return @search_results
+    @search_results = Room.where("address LIKE ?", "%#{input_address}%")
   end
 
   def search_room_info()
     room_params = params.require(:room).permit(:room_info)
     input_room_info = room_params[:room_info]
     @search_results = Room.where("name LIKE ? OR introduction LIKE ?", "%#{input_room_info}%", "%#{input_room_info}%")
-
-    return @search_results
   end

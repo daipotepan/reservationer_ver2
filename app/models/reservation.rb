@@ -19,4 +19,9 @@ class Reservation < ApplicationRecord
 
     if Date.today < checkin_date
       errors.add(:checkin_date, "は本日よりも後にしてください")
+    end
+  end
+
+  belongs_to :user
+  belongs_to :room
 end

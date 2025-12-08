@@ -1,10 +1,19 @@
 class RoomsController < ApplicationController
   def index
-    @rooms = Room.find_by(id: session[:id]).all
+    user = User.find_by(id: session[:id])
+
+    if user && Room.column_names.include?("user_id")
+      @rooms = user.rooms
+    elsif user.nil?
+      @rooms = Room.none
+    else
+      Rails.logger.warn "rooms table missing user_id column — falling back to Room.all"
+      @rooms = Room.all
+    end
   end
 
   def show
-    @room = Room.find_by(id: session[:id])
+    @room = Room.find_by(id: params[:id])
   end
 
   def new
@@ -12,7 +21,10 @@ class RoomsController < ApplicationController
   end
 
   def create
-    @room = Room.new(params.require(:room).permit(:room_img, :name, :introduction, :payment_amount, :address))
+    @room = Room.new(room_params)
+    user = User.find_by(id: session[:id])
+    @room.user = user if user && Room.column_names.include?("user_id")
+
     if @room.save
       flash[:notice] = "施設の登録に成功しました。"
       redirect_to rooms_path
@@ -23,5 +35,8 @@ class RoomsController < ApplicationController
     end
   end
 
+  def room_params
+    params.require(:room).permit(:room_img, :name, :introduction, :payment_amount, :address)
+  end
 end
 

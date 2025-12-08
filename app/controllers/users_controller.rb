@@ -30,8 +30,9 @@ class UsersController < ApplicationController
   def update_account
     @user = User.find_by(id: session[:id])
     if @user.update(params.require(:user).permit(:email, :password))
+      @user.conf_password = @user.password
       flash[:notice] = "アカウントの編集に成功しました。"
-      redirect_to login_users_path
+      redirect_to index_reservations_path
     else
       flash[:notice] = "編集に失敗しました。"
       render "edit_account", status: :unprocessable_entity

@@ -5,7 +5,7 @@ class CreateRooms < ActiveRecord::Migration[7.2]
       t.string :name
       t.string :introduction
       t.string :address
-      t.integer :Payment_amount
+      t.integer :payment_amount
 
       t.timestamps
     end
