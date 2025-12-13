@@ -1,45 +1,44 @@
-<h3>ユーザー新規登録</h3>
 
 <%= render "shared/error", obj: @user %>
 
-<%= form_with model: @user, url: create_users_path do |f| %>
-  <table>
-    <tr>
-      <th><%= f.label :icon, "アイコン" %></th>
-      <td><%= f.file_field :icon, accept: "image/*" %></td>
-    </tr>
+<div class="user-form-wrapper">
+  <h3 class="form-title">新規登録</h3>
 
-    <tr>
-      <th><%= f.label :name, "名前" %></th>
-      <td><%= f.text_field :name %></td>
-    </tr>
+  <%= form_with model: @user, local: true, html: { class: "user-form", multipart: true } do |f| %>
+    <div class="form-grid">
+      <div class="form-row">
+        <%= f.label :icon, "アイコン", class: "form-label" %>
+        <div>
+          <label for="icon_input" class="avatar-preview" id="avatar_preview" style="cursor:pointer;">
+            <span class="avatar-placeholder">PNG/JPG（クリックして選択）</span>
+          </label>
+          <%= f.file_field :icon, id: "icon_input", class: "form-input", accept: "image/*", style: "display:none;" %>
+        </div>
+      </div>
 
-    <tr>
-      <th><%= f.label :email, "メールアドレス" %></th>
-      <td><%= f.email_field :email %></td>
-    </tr>
+      <div class="form-row">
+        <%= f.label :name, "名前", class: "form-label" %>
+        <%= f.text_field :name, class: "form-input" %>
+      </div>
 
-    <tr>
-      <th><%= f.label :password, "パスワード" %></th>
-      <td><%= f.password_field :password %></td>
-    </tr>
+      <div class="form-row">
+        <%= f.label :email, "メールアドレス", class: "form-label" %>
+        <%= f.email_field :email, class: "form-input" %>
+      </div>
 
-    <tr>
-      <th><%= f.label :conf_password, "確認用パスワード" %></th>
-      <td><%= f.password_field :conf_password %></td>
-    </tr>
+      <div class="form-row">
+        <%= f.label :password, "パスワード", class: "form-label" %>
+        <%= f.password_field :password, class: "form-input", autocomplete: "new-password" %>
+      </div>
+      
+      <div class="form-row">
+        <%= f.label :conf_password, "確認用パスワード", class: "form-label" %>
+        <%= f.password_field :conf_password, class: "form-input", autocomplete: "new-password" %>
+      </div>
+    </div>
 
-    <tr> 
-      <th><%= f.label :introduction, "自己紹介" %></th>
-      <td><%= f.text_area :introduction %></td>
-    </tr>
-  </table>
-
-  <div>
-    <ul>
-      <li><%= f.submit "登録完了する" %></li>
-      <li><%= link_to "ログイン画面へ", login_users_path %></li>
-    </ul>
-  </div>
-
-<% end %>
+    <div class="form-actions">
+      <%= f.submit "登録する", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

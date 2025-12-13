@@ -18,6 +18,15 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header class="site-header">
+      <div class="header-inner">
+        <a href="<%= root_path %>" class="logo">Reserve</a>
+        <%= render "shared/current_user" %>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <%= yield %>
+    </main>
   </body>
 </html>

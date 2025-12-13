@@ -1,4 +1,3 @@
-<%= render "shared/dropdown" %>
 
 <%= render "shared/current_user" %>
 
@@ -6,7 +5,7 @@
 <h3>予約できる施設一覧</h3>
 
 
-<table>
+<table class="styled-table rooms-table">
   <thead>
     <tr>
       <th>施設画像</th>
@@ -20,13 +19,16 @@
   <tbody>
     <% @rooms.each do |room| %>
       <tr>
-        <td><%= image_tag room.room_img %></td>
-        <td><%= room.name %></td>
-        <td><%= room.introduction %></td>
-        <td><%= room.payment_amount %></td>
-        <td><%= room.created_at.to_fs(:date_jp) %></td>
-        <td>
-          <%= link_to "詳細", room %>
+        <td class="img-cell">
+          <% img_src = room.room_img.to_s.strip.presence || "https://rails-02-sample.herokuapp.com/assets/room/default-image-4e0ac6b8d01335b5b22fe6586af13644ae51dddb6aeabf35b9174e80f13cd09d.png" %>
+          <%= tag.img src: img_src, alt: room.name, class: "facility-image" %>
+        </td>
+        <td class="name"><%= room.name %></td>
+        <td class="intro"><%= room.introduction %></td>
+        <td class="price">¥<%= number_with_delimiter(room.payment_amount) %></td>
+        <td class="created"><%= room.created_at.to_fs(:date_jp) %></td>
+        <td class="actions">
+          <%= link_to "詳細", room, class: "btn btn-outline" %>
         </td>
       </tr>
     <% end %>

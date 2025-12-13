@@ -1,4 +1,3 @@
-<%= render "shared/dropdown" %>
 <%= render "shared/current_user" %>
 
 <%= render "shared/search_address" %>
@@ -22,7 +21,8 @@
     <tbody>
       <% @rooms.each do |room| %>
         <tr>
-          <td><img><%= room.room_img %></td>
+          <% img_src = room.room_img.to_s.strip.presence || "https://rails-02-sample.herokuapp.com/assets/room/default-image-4e0ac6b8d01335b5b22fe6586af13644ae51dddb6aeabf35b9174e80f13cd09d.png" %>
+          <td class="img-cell"><%= tag.img src: img_src, alt: room.name, class: "facility-image" %></td>
           <td><%= room.name %></td>
           <td><%= room.introduction %></td>
           <td><%= room.address %></td>
@@ -31,7 +31,7 @@
             <%= link_to "詳細", room %>
           </td>
           <td>
-            <%= link_to "予約する", new_reservation_path %>
+            <%= link_to "予約する", new_reservation_path(room_id: room.id) %>
           </td>
         </tr>
       <% end %>

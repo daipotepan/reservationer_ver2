@@ -1,29 +1,27 @@
-<%= render "shared/dropdown" %>
-<%= render "shared/current_user" %>
-<h3>確認画面</h3>
+<%= form_with model: @reservation, url: reservations_path(room_id: @room.id), method: :post, local: true, data: { turbo: false } do |f| %>
+  <div>
+    <label>チェックイン日</label>
+    <%= f.date_field :checkin_date, value: @reservation.checkin_date, disabled: true %>
+    <%= f.hidden_field :checkin_date, value: @reservation.checkin_date %>
+  </div>
 
+  <div>
+    <label>チェックアウト日</label>
+    <%= f.date_field :checkout_date, value: @reservation.checkout_date, disabled: true %>
+    <%= f.hidden_field :checkout_date, value: @reservation.checkout_date %>
+  </div>
 
+  <div>
+    <label>人数</label>
+    <%= f.number_field :number_of_people, value: @reservation.number_of_people, disabled: true %>
+    <%= f.hidden_field :number_of_people, value: @reservation.number_of_people %>
+  </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>チェックイン日</th>
-      <th>チェックアウト日</th>
-      <th>宿泊日数</th>
-      <th>人数</th>
-      <th>支払い金額</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <tr>
-      <td><%= @conf_reservation.checkin_date %></td>
-      <td><%= @conf_reservation.checkout_date %></td>
-      <td><%= @conf_reservation.checkout_date - @conf_reservation.checkin_date %></td>
-      <td><%= @conf_reservation.number_of_people %></td>
-      <td><%= @room_payment_amount * @conf_reservation.number_of_people %></td>
-    </tr>
-  </tbody>
-</table>
-
-<p><%= submit "予約を確定する">
+  <div class="form-actions">
+    <ul>
+      <li><%= f.submit "予約を確定する", class: "btn btn-primary" %></li>
+      <li><%= link_to "戻る", new_reservation_path(room_id: @room.id), class: "btn btn-outline" %></li>
+      <li><%= link_to "ログイン画面へ", login_users_path %></li>
+    </ul>
+  </div>
+<% end %>

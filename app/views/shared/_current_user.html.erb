@@ -1,13 +1,21 @@
-<header>
-  <div class="current-user">
+<div class="user-menu">
+  <div class="user-info" id="user_info">
     <% if current_user %>
-      <div id="icon" class="user-icon"><%= image_tag current_user.icon %></div>
-      <p class="user-name"><%= current_user.name %></p>
+      <% avatar_src = current_user.icon.to_s.strip %>
+      <% if avatar_src.blank? %>
+        <% avatar_src = "https://rails-02-sample.herokuapp.com/assets/common/default-avatar-7a6cbfd7993e89f24bfc888f4a035a83c6f1428b8bdc47eed9095f2799a40153.png" %>
+      <% end %>
+      <%= tag.img src: avatar_src, alt: "プロフィール画像", id: "icon", class: "icon" %>
+      <span class="user-name"><%= current_user.name %> さん</span>
     <% else %>
-      <div class="auth-links">
-        <p><%= link_to "ログイン", login_users_path %></p>
-        <p><%= link_to "新規登録", new_users_path %></p>
+      <div class="guest-box">
+        <p>ログインしていません</p>
+        <div class="auth-links">
+          <%= link_to "ログイン", login_users_path, class: "btn btn-primary" %>
+          <%= link_to "新規登録", new_user_path, class: "btn btn-secondary" %>
+        </div>
       </div>
     <% end %>
+    <%= render "shared/dropdown" %>
   </div>
-</header>
+</div>

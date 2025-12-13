@@ -17,7 +17,7 @@ class Reservation < ApplicationRecord
   def today_date_after_checkin_date
     return if checkin_date.blank?
 
-    if Date.today < checkin_date
+    if Date.today > checkin_date
       errors.add(:checkin_date, "は本日よりも後にしてください")
     end
   end

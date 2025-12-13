@@ -1,11 +1,10 @@
-<%= render "shared/dropdown" %>
 <%= render "shared/current_user" %>
 <h3>予約ページ</h3>
 
 
 <%= render "shared/error", obj: @reservation %>
 
-<%= form_with model: @reservation do |f| %>
+<%= form_with model: @reservation, url: conf_reservations_path(room_id: @room.id), multipart: true, local: true, data: { turbo: false } do |f| %>
   <table>
   
     <tr>
@@ -24,11 +23,13 @@
     </tr>
 
   </table>
+  <%= f.hidden_field :room_id, value: @room.id %>
 
-  <div>
+  <div class="form-actions">
     <ul>
-      <li><%= f.submit "予約完了する" %></li>
-      <li><%= link_to "ログイン画面へ", users_login_path %></li>
+      <li><%= f.submit "確認画面へ", class: "btn btn-primary" %></li>
+      <li><%= link_to "入力をやり直す", new_reservation_path(room_id: @room.id), class: "btn btn-outline" %></li>
+      <li><%= link_to "ログイン画面へ", login_users_path %></li>
     </ul>
   </div>
 

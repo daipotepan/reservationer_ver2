@@ -1,11 +1,8 @@
-<%= render "shared/dropdown" %>
 <%= render "shared/current_user" %>
 
 <h3>プロフィール編集</h3>
 
-
-
-<%= form_with model: @user do |f| %>
+<%= form_with url: update_profile_users_path, scope: :user, local: true, method: :patch, html: { multipart: true } do |f| %>
   <table>
     <tr>
       <th><%= f.label :icon, "アイコン" %></th>
@@ -26,7 +23,7 @@
   <div>
     <ul>
       <li><%= f.submit "編集完了する" %></li>
-      <li><%= link_to "ユーザー情報ページに戻る", index_users_path %></li>
-    <ul>
+      <li><%= link_to "ユーザー情報ページに戻る", users_path %></li>
+    </ul>
   </div>
 <% end %>

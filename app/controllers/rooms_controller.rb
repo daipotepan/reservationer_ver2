@@ -21,7 +21,19 @@ class RoomsController < ApplicationController
   end
 
   def create
-    @room = Room.new(room_params)
+    params_room = room_params.dup
+    # Handle uploaded file for room_img
+    if params_room[:room_img].respond_to?(:original_filename)
+      uploaded = params_room.delete(:room_img)
+      filename = "room_#{Time.now.to_i}_#{SecureRandom.hex(6)}_#{uploaded.original_filename}"
+      dir = Rails.root.join('public', 'uploads', 'rooms')
+      FileUtils.mkdir_p(dir) unless Dir.exist?(dir)
+      path = dir.join(filename)
+      File.open(path, 'wb') { |f| f.write(uploaded.read) }
+      params_room[:room_img] = "/uploads/rooms/#{filename}"
+    end
+
+    @room = Room.new(params_room)
     user = User.find_by(id: session[:id])
     @room.user = user if user && Room.column_names.include?("user_id")
 

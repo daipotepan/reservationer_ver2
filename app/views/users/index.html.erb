@@ -1,4 +1,3 @@
-<%= render "shared/dropdown" %>
 <%= render "shared/current_user" %>
 
 <h3>ユーザー情報一覧</h3>
@@ -14,11 +13,16 @@
   </thead>
 
   <tbody>
-    <tr>
-      <td><%= @user.email%></td>
-      <td>
-        <%= "*" * (@user.password.to_s.length) %>
-      </td>
+    <% if @user.present? %>
+      <tr>
+        <td><%= @user.email %></td>
+        <td><%= "*" * (@user.password.to_s.length) %></td>
+      </tr>
+    <% else %>
+      <tr>
+        <td colspan="2">ログインしていません</td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
 
