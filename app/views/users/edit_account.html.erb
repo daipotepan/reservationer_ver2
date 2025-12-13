@@ -1,26 +1,26 @@
 <%= render "shared/current_user" %>
 
-<h3>アカウント情報編集</h3>
+<div class="card">
+  <h3 class="page-title">アカウント情報編集</h3>
 
+  <%= form_with url: update_account_users_path, scope: :user, local: true, method: :patch do |f| %>
+    <table class="form-table">
+      <tr>
+        <th><%= f.label :email, "メールアドレス" %></th>
+        <td><%= f.email_field :email, class: "form-input" %></td>
+      </tr>
 
-<%= form_with url: update_account_users_path, scope: :user, local: true, method: :patch do |f| %>
-  <table>
-    <tr>
-      <th><%= f.label :email, "メールアドレス" %></th>
-      <td><%= f.email_field :email %></td>
-    </tr>
+      <tr>
+        <th><%= f.label :password, "パスワード" %></th>
+        <td><%= f.password_field :password, class: "form-input" %></td>
+      </tr>
+    </table>
 
-    <tr>
-      <th><%= f.label :password, "パスワード" %></th>
-      <td><%= f.text_field :password %></td>
-    </tr>
-  </table>
-
-  <div>
-    <ul>
-      <li><%= f.submit "編集完了する" %></li>
-      <li><%= link_to "ユーザー情報ページに戻る", users_path %></li>
-    </ul>
-  </div>
-
-<% end %>
+    <div class="form-actions">
+      <ul>
+        <li><%= f.submit "編集完了する", class: "btn btn-primary" %></li>
+        <li><%= link_to "ユーザー情報ページに戻る", users_path, class: "btn btn-outline" %></li>
+      </ul>
+    </div>
+  <% end %>
+</div>

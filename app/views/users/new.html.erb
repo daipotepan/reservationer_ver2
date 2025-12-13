@@ -1,8 +1,8 @@
 
 <%= render "shared/error", obj: @user %>
 
-<div class="user-form-wrapper">
-  <h3 class="form-title">新規登録</h3>
+<div class="user-form-wrapper card">
+  <h3 class="page-title">新規登録</h3>
 
   <%= form_with model: @user, local: true, html: { class: "user-form", multipart: true } do |f| %>
     <div class="form-grid">

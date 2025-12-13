@@ -1,22 +1,23 @@
-<h3>ログイン</h3>
+<div class="card">
+  <h3 class="page-title">ログイン</h3>
 
-<%= form_with url: login_users_path, scope: :user, local: true do |f| %>
-  <table>
-    <tr>
-      <th><%= f.label :email, "メールアドレス" %></th>
-      <td><%= f.email_field :email %></td>
-    </tr>
-    <tr>
-      <th><%= f.label :password, "パスワード" %></th>
-      <td><%= f.password_field :password %></td>
-    </tr>
-  </table>
+  <%= form_with url: login_users_path, scope: :user, local: true do |f| %>
+    <table class="form-table">
+      <tr>
+        <th><%= f.label :email, "メールアドレス" %></th>
+        <td><%= f.email_field :email, class: "form-input" %></td>
+      </tr>
+      <tr>
+        <th><%= f.label :password, "パスワード" %></th>
+        <td><%= f.password_field :password, class: "form-input" %></td>
+      </tr>
+    </table>
 
- 
-  <div>
-    <ul>
-      <li><%= f.submit "ログインする" %></li>
-      <li><%= link_to "アカウント新規作成", new_user_path %></li>
-    </ul>
-  </div>
-<% end %>
+    <div class="form-actions">
+      <ul>
+        <li><%= f.submit "ログインする", class: "btn btn-primary" %></li>
+        <li><%= link_to "アカウント新規作成", new_user_path, class: "btn btn-outline" %></li>
+      </ul>
+    </div>
+  <% end %>
+</div>

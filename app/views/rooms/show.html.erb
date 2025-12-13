@@ -1,8 +1,9 @@
-<h3>施設詳細</h3>
-
 <%= render "shared/current_user" %>
 
-<table>
+<div class="card">
+  <h3 class="page-title">施設詳細</h3>
+
+  <table class="form-table">
   <thead>
     <tr>
       <th>施設画像</th>
@@ -23,6 +24,9 @@
   </tbody>
 </table>
 
-<p><%= link_to "前のページに戻る", (request.referer || root_path)%></p>
-<%= link_to "予約する", new_reservation_path(room_id: @room.id) %>
+  <div style="margin-top:12px; display:flex; gap:8px;">
+    <%= link_to "前のページに戻る", (request.referer || root_path), class: "btn btn-outline" %>
+    <%= link_to "予約する", new_reservation_path(room_id: @room.id), class: "btn btn-primary" %>
+  </div>
+</div>
 
