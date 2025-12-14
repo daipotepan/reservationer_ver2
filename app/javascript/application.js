@@ -48,9 +48,5 @@ document.addEventListener("turbo:load", () => {
       };
       reader.readAsDataURL(file);
     });
-
-    // Clicking the label already focuses/activates the associated file input
-    // Avoid programmatically calling `iconInput.click()` here to prevent
-    // the file dialog from opening twice in some browsers.
   }
 });

@@ -25,7 +25,7 @@
         <td class="name"><%= room.name %></td>
         <td class="intro"><%= room.introduction %></td>
         <td class="price">¥<%= number_with_delimiter(room.payment_amount) %></td>
-        <td class="created"><%= room.created_at.to_fs(:date_jp) %></td>
+        <td class="created"><%= room.created_at.(:date_jp) %></td>
         <td class="actions">
           <%= link_to "詳細", room, class: "btn btn-outline" %>
         </td>

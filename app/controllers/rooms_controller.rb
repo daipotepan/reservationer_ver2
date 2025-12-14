@@ -15,7 +15,6 @@ class RoomsController < ApplicationController
   end
 
   def show
-    # @room is set by before_action :set_room
   end
 
   def edit

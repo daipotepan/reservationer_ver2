@@ -18,16 +18,19 @@
   </thead>
 
   <tbody>
-    <% @rooms.each do |room| %>
+    <% if @room %>
       <tr>
-        <% img_src = room.room_img.to_s.strip.presence || "https://rails-02-sample.herokuapp.com/assets/room/default-image-4e0ac6b8d01335b5b22fe6586af13644ae51dddb6aeabf35b9174e80f13cd09d.png" %>
-        <td class="img-cell"><%= tag.img src: img_src, alt: room.name, class: "facility-image" %></td>
-        <td><%= room.name %></td>
-        <td><%= room.introduction %></td>
-        <td><%= reservation.number_of_people * reservation.payment_amount %></td>
-        <td><%= reservation.checkin_date.to_fs(:date_jp) %></td>
-        <td><%= reservation.checkout_date.to_fs(:date_jp) %></td>
-        <td><%= reservation.created_at.to_fs(:date_jp) %></td>
+        <% img_src = @room.room_img.to_s.strip.presence ||
+          "https://rails-02-sample.herokuapp.com/assets/room/default-image-4e0ac6b8d01335b5b22fe6586af13644ae51dddb6aeabf35b9174e80f13cd09d.png" %>
+
+        <td class="img-cell">
+          <%= tag.img src: img_src, alt: @room.name, class: "facility-image" %>
+        </td>
+
+        <td><%= @room.name %></td>
+        <td><%= @reservation.checkin_date.to_fs(:date_jp) %></td>
+        <td><%= @reservation.checkout_date.(:date_jp) %></td>
+        <td><%= @reservation.number_of_people %></td>
       </tr>
     <% end %>
   </tbody>

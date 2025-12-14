@@ -3,10 +3,11 @@
 <%= render "shared/search_address" %>
 <%= render "shared/search_room_info" %>
 
-<div class="card">
-  <h3 class="page-title">予約できる施設一覧</h3>
+<h3>予約できる施設一覧</h3>
 
-  <table class="styled-table">
+
+
+<table class="styled-table">
   <% if @rooms.present? %>
     <thead>
       <tr>
@@ -38,5 +39,4 @@
   <% else %>
     <p>該当する施設は見つかりませんでした。</p>
   <% end %>
-  </table>
-</div>
+</table>

@@ -5,7 +5,7 @@ class ReservationsController < ApplicationController
       return
     end
 
-    address = params[:room][:address]
+    address   = params[:room][:address]
     room_info = params[:room][:room_info]
 
     if address.present?
@@ -15,6 +15,12 @@ class ReservationsController < ApplicationController
     else
       @rooms = Room.all
     end
+  end
+
+
+  def show
+    @reservation = Reservation.find(params[:id])
+    @room = @reservation.room
   end
 
   def new

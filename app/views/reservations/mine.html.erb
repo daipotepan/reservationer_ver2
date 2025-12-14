@@ -22,11 +22,10 @@
             <td><%= res.checkin_date %></td>
             <td><%= res.checkout_date %></td>
             <td><%= res.number_of_people %></td>
-            <td><%= res.created_at.to_fs(:date_jp) %></td>
+            <td><%= res.created_at.to_fs(:datetime_jp) %></td>
             <td class="actions">
               <%= link_to "詳細", reservation_path(res), class: "btn btn-outline" %>
-              <%= link_to "キャンセル", reservation_path(res), method: :delete, data: { confirm: "この予約をキャンセルしますか？" }, class: "btn btn-outline" %>
-            </td>
+              <%= link_to "キャンセル", reservation_path(res), data: {turbo_method: :delete, turbo_confirm: "この予約をキャンセルしますか？"}, class: "btn btn-outline" %>
           </tr>
         <% end %>
       </tbody>
