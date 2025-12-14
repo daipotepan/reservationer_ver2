@@ -13,7 +13,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :rooms
+  resources :rooms do
+    collection do
+      get :mine
+    end
+  end
   get "search_address/applications", to: "applications#search_address", as: :search_address_applications
   get "search_room_info/applications", to: "applications#search_room_info", as: :search_room_info_applications
 
@@ -22,6 +26,7 @@ Rails.application.routes.draw do
     collection do
       get :conf
       post :conf
+      get :mine
     end
   end
 end

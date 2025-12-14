@@ -53,6 +53,25 @@ class ReservationsController < ApplicationController
     end
   end
 
+  def mine
+    user = User.find_by(id: session[:id])
+    if user
+      @reservations = user.reservations.includes(:room)
+    else
+      @reservations = Reservation.none
+    end
+  end
+
+  def destroy
+    @reservation = Reservation.find_by(id: params[:id])
+    if @reservation && @reservation.user_id == session[:id]
+      @reservation.destroy
+      redirect_to mine_reservations_path, notice: "予約をキャンセルしました。"
+    else
+      redirect_to mine_reservations_path, alert: "予約のキャンセルに失敗しました。"
+    end
+  end
+
   private
 
   def search_address(input_address)

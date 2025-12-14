@@ -1,0 +1,37 @@
+<%= render "shared/current_user" %>
+
+<div class="card">
+  <h3 class="page-title">作成した予約一覧</h3>
+
+  <% if @reservations.present? %>
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>施設</th>
+          <th>チェックイン</th>
+          <th>チェックアウト</th>
+          <th>人数</th>
+          <th>作成日</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @reservations.each do |res| %>
+          <tr>
+            <td><%= link_to res.room.name, room_path(res.room) if res.room %></td>
+            <td><%= res.checkin_date %></td>
+            <td><%= res.checkout_date %></td>
+            <td><%= res.number_of_people %></td>
+            <td><%= res.created_at.to_fs(:date_jp) %></td>
+            <td class="actions">
+              <%= link_to "詳細", reservation_path(res), class: "btn btn-outline" %>
+              <%= link_to "キャンセル", reservation_path(res), method: :delete, data: { confirm: "この予約をキャンセルしますか？" }, class: "btn btn-outline" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p class="muted">作成した予約はありません。</p>
+  <% end %>
+</div>

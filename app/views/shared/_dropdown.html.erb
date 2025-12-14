@@ -3,6 +3,8 @@
     <li><%= link_to "アカウントページ", users_path %></li>
     <li><%= link_to "アカウント情報編集", edit_account_users_path %></li>
     <li><%= link_to "プロフィール情報編集", edit_profile_users_path %></li>
+    <li><%= link_to "登録した施設", mine_rooms_path %></li>
+    <li><%= link_to "作成した予約", mine_reservations_path %></li>
     <li><%= link_to "ログアウト", logout_users_path,data: { turbo_method: :delete, confirm: "ログアウトしますか？" },id: "logout" %></li>
   </ul>
 </div>
