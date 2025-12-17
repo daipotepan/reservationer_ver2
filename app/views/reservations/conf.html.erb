@@ -1,4 +1,9 @@
-<%= form_with model: @reservation, url: reservations_path(room_id: @room.id), method: :post, local: true, data: { turbo: false } do |f| %>
+<%= form_with model: @reservation,
+              url: reservations_path(room_id: @room.id),
+              method: :post,
+              local: true,
+              data: { turbo: false } do |f| %>
+
   <div class="card">
     <h3 class="page-title">予約内容の確認</h3>
 
@@ -6,34 +11,43 @@
       <tr>
         <th>チェックイン日</th>
         <td>
-          <%= f.date_field :checkin_date, value: @reservation.checkin_date, disabled: true, class: "form-input" %>
-          <%= f.hidden_field :checkin_date, value: @reservation.checkin_date %>
+          <%= @reservation.checkin_date.to_fs(:date_jp) %>
+          <%= f.hidden_field :checkin_date %>
         </td>
       </tr>
 
       <tr>
         <th>チェックアウト日</th>
         <td>
-          <%= f.date_field :checkout_date, value: @reservation.checkout_date, disabled: true, class: "form-input" %>
-          <%= f.hidden_field :checkout_date, value: @reservation.checkout_date %>
+          <%= @reservation.checkout_date.to_fs(:date_jp) %>
+          <%= f.hidden_field :checkout_date %>
         </td>
+      </tr>
+
+      <tr>
+        <th>宿泊日数</th>
+        <td><%= @stay_days %> 泊</td>
       </tr>
 
       <tr>
         <th>人数</th>
         <td>
-          <%= f.number_field :number_of_people, value: @reservation.number_of_people, disabled: true, class: "form-input" %>
-          <%= f.hidden_field :number_of_people, value: @reservation.number_of_people %>
+          <%= @reservation.number_of_people %> 人
+          <%= f.hidden_field :number_of_people %>
+        </td>
+      </tr>
+
+      <tr>
+        <th>支払い金額</th>
+        <td class="price">
+          ¥<%= number_with_delimiter(@total_payment_amount) %>
         </td>
       </tr>
     </table>
 
     <div class="form-actions">
-      <ul>
-        <li><%= f.submit "予約を確定する", class: "btn btn-primary" %></li>
-        <li><%= link_to "戻る", new_reservation_path(room_id: @room.id), class: "btn btn-outline" %></li>
-        <li><%= link_to "ログイン画面へ", login_users_path %></li>
-      </ul>
+      <%= f.submit "予約を確定する", class: "btn btn-primary" %>
+      <%= link_to "戻る", new_reservation_path(room_id: @room.id), class: "btn btn-outline" %>
     </div>
   </div>
 <% end %>

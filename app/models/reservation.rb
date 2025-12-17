@@ -1,34 +1,30 @@
 class Reservation < ApplicationRecord
-
-  validates :checkin_date, presence: true
-  validates :checkout_date, presence: true
-  validates :number_of_people, presence: true
-
-  validate :checkout_date_after_checkin_date
-  validate :today_date_after_checkin_date
-
-  def checkout_date_after_checkin_date
-    return if checkin_date.blank? || checkout_date.blank?
-    if checkout_date < checkin_date
-      errors.add(:checkout_date, "はチェックイン日より後にしてください")
-    end
-  end
-
-  def today_date_after_checkin_date
-    return if checkin_date.blank?
-
-    if Date.today > checkin_date
-      errors.add(:checkin_date, "は本日よりも後にしてください")
-    end
-  end
-
   belongs_to :user
   belongs_to :room
 
-  def total_payment_amount
-    return 0 unless checkin_date && checkout_date && room
+  validates :checkin_date, presence: true
+  validates :checkout_date, presence: true
+  validates :number_of_people, presence: true,
+                               numericality: { greater_than: 0 }
 
-    nights = (checkout_date - checkin_date).to_i
-    nights * room.payment_amount
+  validate :checkout_after_checkin
+
+  def stay_days
+    return 0 unless checkin_date && checkout_date
+    (checkout_date - checkin_date).to_i
+  end
+
+  def total_payment_amount
+    return 0 unless room
+    room.payment_amount * stay_days * number_of_people
+  end
+
+  private
+
+  def checkout_after_checkin
+    return if checkin_date.blank? || checkout_date.blank?
+    if checkout_date <= checkin_date
+      errors.add(:checkout_date, "はチェックイン日より後の日付を選択してください")
+    end
   end
 end

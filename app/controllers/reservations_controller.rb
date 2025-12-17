@@ -43,7 +43,13 @@ class ReservationsController < ApplicationController
       redirect_to new_reservation_path(room_id: room_id), alert: "対象の施設が見つかりませんでした。" and return
     end
 
-    @room_payment_amount = @room.payment_amount
+    # 宿泊日数（チェックアウト - チェックイン）
+    @stay_days =
+      (@reservation.checkout_date - @reservation.checkin_date).to_i
+
+    # 合計金額 = 宿泊料金 × 宿泊日数 × 人数
+    @total_payment_amount =
+      @room.payment_amount * @stay_days * @reservation.number_of_people
   end
 
   def create
