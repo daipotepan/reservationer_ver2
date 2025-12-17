@@ -28,9 +28,11 @@
         </td>
 
         <td><%= @room.name %></td>
+        <td><%= @room.introduction %></td>
+        <td>¥<%= number_with_delimiter(@reservation.total_payment_amount) %></td>
         <td><%= @reservation.checkin_date.to_fs(:date_jp) %></td>
-        <td><%= @reservation.checkout_date.(:date_jp) %></td>
-        <td><%= @reservation.number_of_people %></td>
+        <td><%= @reservation.checkout_date.to_fs(:date_jp) %></td>
+        <td><%= @reservation.created_at.to_fs(:datetime_jp) %></td>
       </tr>
     <% end %>
   </tbody>

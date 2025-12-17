@@ -26,7 +26,7 @@
             <td><%= room.created_at.to_fs(:datetime_jp) %></td>
             <td class="actions">
               <%= link_to "編集", edit_room_path(room), class: "btn btn-outline" %>
-              <%= link_to "削除", room_path(room), method: :delete, data: { confirm: "この施設を削除しますか？" }, class: "btn btn-outline" %>
+              <%= link_to "削除", room_path(room), data: {turbo_method: :delete, turbo_confirm: "この施設を削除しますか？"}, class: "btn btn-outline" %>
             </td>
           </tr>
         <% end %>

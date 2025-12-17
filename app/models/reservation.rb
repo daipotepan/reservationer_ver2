@@ -24,4 +24,11 @@ class Reservation < ApplicationRecord
 
   belongs_to :user
   belongs_to :room
+
+  def total_payment_amount
+    return 0 unless checkin_date && checkout_date && room
+
+    nights = (checkout_date - checkin_date).to_i
+    nights * room.payment_amount
+  end
 end

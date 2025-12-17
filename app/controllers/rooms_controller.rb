@@ -95,6 +95,8 @@ class RoomsController < ApplicationController
 
   def destroy
     user = User.find_by(id: session[:id])
+    @room = Room.find_by(id: params[:id])
+
     if @room && user && @room.user_id == user.id
       @room.destroy
       redirect_to mine_rooms_path, notice: "施設を削除しました。"
