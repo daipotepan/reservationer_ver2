@@ -1,0 +1,16 @@
+<div class="search-address">
+  <%= form_with url: reservations_path, scope: :room, method: :get, local: true do |f| %>
+    <table>
+      <tr>
+        <th><%= f.label :address, "探したいエリア" %></th>
+        <td><%= f.text_field :address %></td>
+      </tr>
+    </table>
+
+    <div class="search-actions">
+      <ul>
+        <li><%= f.submit "検索する" %></li>
+      </ul>
+    </div>
+  <% end %>
+</div>

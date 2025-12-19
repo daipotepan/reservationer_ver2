@@ -1,0 +1,40 @@
+
+
+<div class="card">
+  <h3 class="page-title">プロフィール編集</h3>
+
+  <%= form_with url: update_profile_users_path, scope: :user, local: true, method: :patch, html: { multipart: true } do |f| %>
+    <table class="form-table">
+      <tr>
+        <th><%= f.label :icon, "アイコン" %></th>
+        <td>
+          <div class="avatar-preview" id="avatar_preview">
+            <% if current_user && current_user.icon.present? %>
+              <%= tag.img src: current_user.icon, alt: "avatar", style: "width:100%;height:100%;object-fit:cover;border-radius:8px;" %>
+            <% else %>
+              <span class="avatar-placeholder">PNG/JPG</span>
+            <% end %>
+          </div>
+          <%= f.file_field :icon, id: "icon_input", class: "form-input" %>
+        </td>
+      </tr>
+
+      <tr>
+        <th><%= f.label :name, "名前" %></th>
+        <td><%= f.text_field :name, class: "form-input" %></td>
+      </tr>
+
+      <tr> 
+        <th><%= f.label :introduction, "自己紹介" %></th>
+        <td><%= f.text_area :introduction, class: "form-input" %></td>
+      </tr>
+    </table>
+
+    <div class="form-actions">
+      <ul>
+        <li><%= f.submit "編集完了する", class: "btn btn-primary" %></li>
+        <li><%= link_to "ユーザー情報ページに戻る", users_path, class: "btn btn-outline" %></li>
+      </ul>
+    </div>
+  <% end %>
+</div>

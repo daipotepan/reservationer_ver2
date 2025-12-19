@@ -1,0 +1,39 @@
+
+
+<div class="card">
+  <h3 class="page-title">予約した施設一覧</h3>
+
+  <% if @reservations.present? %>
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>施設画像</th>
+          <th>施設名</th>
+          <th>宿泊料金</th>
+          <th>人数</th>
+          <th>宿泊日数</th>
+          <th>合計金額</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @reservations.each do |reservation| %>
+          <% room = reservation.room %>
+          <% next unless room %>
+          <tr>
+            <% img_src = room.room_img.to_s.strip.presence || "https://rails-02-sample.herokuapp.com/assets/room/default-image-4e0ac6b8d01335b5b22fe6586af13644ae51dddb6aeabf35b9174e80f13cd09d.png" %>
+            <td class="img-cell">
+              <%= tag.img src: img_src, alt: room.name, class: "facility-image" %>
+            </td>
+            <td class="name"><%= room.name %></td>
+            <td class="price">¥<%= number_with_delimiter(room.payment_amount) %></td>
+            <td class="people"><%= reservation.number_of_people %>人</td>
+            <td class="days"><%= reservation.stay_days %>泊</td>
+            <td class="total">¥<%= number_with_delimiter(reservation.total_payment_amount) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p class="muted">予約した施設はありません。</p>
+  <% end %>
+</div>

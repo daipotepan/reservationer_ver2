@@ -1,0 +1,26 @@
+<h3 class="page-title">ユーザー情報</h3>
+
+<div class="card">
+  <table class="info-table">
+    <thead>
+      <tr>
+        <th>メールアドレス</th>
+        <th>パスワード</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if @user.present? %>
+        <tr>
+          <td><%= @user.email %></td>
+          <td class="password-mask">********</td>
+        </tr>
+      <% else %>
+        <tr>
+          <td colspan="2" class="not-logged-in">ログインしていません</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+

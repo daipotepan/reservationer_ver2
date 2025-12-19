@@ -1,0 +1,16 @@
+<div class="search-room-info">
+  <%= form_with url: reservations_path, scope: :room, method: :get, local: true do |f| %>
+    <table>
+      <tr>
+        <th><%= f.label :room_info, "探したい部屋の情報" %></th>
+        <td><%= f.text_field :room_info %></td>
+      </tr>
+    </table>
+
+    <div class="search-actions">
+      <ul>
+        <li><%= f.submit "検索する" %></li>
+      </ul>
+    </div>
+  <% end %>
+</div>

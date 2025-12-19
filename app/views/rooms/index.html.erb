@@ -1,0 +1,37 @@
+
+
+
+<div class="card">
+  <h3 class="page-title">予約できる施設一覧</h3>
+
+  <table class="styled-table rooms-table">
+  <thead>
+    <tr>
+      <th>施設画像</th>
+      <th>施設名</th>
+      <th>紹介文</th>
+      <th>宿泊料金</th>
+      <th>作成日</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rooms.each do |room| %>
+      <tr>
+        <td class="img-cell">
+          <% img_src = room.room_img.to_s.strip.presence || "https://rails-02-sample.herokuapp.com/assets/room/default-image-4e0ac6b8d01335b5b22fe6586af13644ae51dddb6aeabf35b9174e80f13cd09d.png" %>
+          <%= tag.img src: img_src, alt: room.name, class: "facility-image" %>
+        </td>
+        <td class="name"><%= room.name %></td>
+        <td class="intro truncate-intro"><%= room.introduction %></td>
+        <td class="price">¥<%= number_with_delimiter(room.payment_amount) %></td>
+        <td class="created"><%= room.created_at.to_fs(:datetime_jp) %></td>
+        <td class="actions">
+          <%= link_to "詳細", room, class: "btn btn-outline" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+</div>

@@ -1,14 +1,37 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  # GET /logout でトップページにリダイレクト（404防止・UX向上）
+  get '/logout', to: redirect('/'), as: nil
+  root "reservations#index"
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
+  delete '/logout', to: 'users#logout', as: :logout
 
-  # Render dynamic PWA files from app/views/pwa/*
-  get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
-  get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+  resources :users do
+    collection do
+      get :login
+      post :login
+
+      get :edit_account
+      patch :update_account
+      get :edit_profile
+      patch :update_profile
+    end
+  end
+
+  resources :rooms do
+    collection do
+      get :mine
+    end
+  end
+  get "search_address/applications", to: "applications#search_address", as: :search_address_applications
+  get "search_room_info/applications", to: "applications#search_room_info", as: :search_room_info_applications
+
+
+  resources :reservations do
+    collection do
+      get :conf
+      post :conf
+      get :mine
+    end
+  end
 end

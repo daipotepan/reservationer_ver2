@@ -1,0 +1,35 @@
+
+<div class="card">
+  <h3 class="page-title">予約ページ</h3>
+
+  <%= render "shared/error", obj: @reservation %>
+
+  <%= form_with model: @reservation, url: conf_reservations_path(room_id: @room.id), multipart: true, local: true, data: { turbo: false } do |f| %>
+    <table class="form-table">
+      <tr>
+        <th><%= f.label :checkin_date, "チェックイン日" %></th>
+        <td><%= f.date_field :checkin_date, class: "form-input" %></td>
+      </tr>
+
+      <tr>
+        <th><%= f.label :checkout_date, "チェックアウト日" %></th>
+        <td><%= f.date_field :checkout_date, class: "form-input" %></td>
+      </tr>
+
+      <tr>
+        <th><%= f.label :number_of_people, "人数" %></th>
+        <td><%= f.number_field :number_of_people, class: "form-input" %></td>
+      </tr>
+    </table>
+
+    <%= f.hidden_field :room_id, value: @room.id %>
+
+    <div class="form-actions">
+      <ul>
+        <li><%= f.submit "確認画面へ", class: "btn btn-primary" %></li>
+        <li><%= link_to "入力をやり直す", new_reservation_path(room_id: @room.id), class: "btn btn-outline" %></li>
+        <li><%= link_to "ログイン画面へ", login_users_path %></li>
+      </ul>
+    </div>
+  <% end %>
+</div>

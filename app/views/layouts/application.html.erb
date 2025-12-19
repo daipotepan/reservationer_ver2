@@ -14,9 +14,19 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <%= yield %>
+    <header class="site-header">
+      <div class="header-inner">
+        <a href="<%= root_path %>" class="logo">Reserve</a>
+        <%= render "shared/current_user" %>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <%= yield %>
+    </main>
   </body>
 </html>

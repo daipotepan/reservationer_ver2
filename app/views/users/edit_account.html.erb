@@ -1,0 +1,29 @@
+
+<div class="card">
+  <h3 class="page-title">アカウント情報編集</h3>
+
+  <%= form_with url: update_account_users_path, scope: :user, local: true, method: :patch do |f| %>
+    <table class="form-table">
+      <tr>
+        <th><%= f.label :email, "メールアドレス" %></th>
+        <td><%= f.email_field :email, class: "form-input" %></td>
+      </tr>
+
+      <tr>
+        <th><%= f.label :password, "パスワード" %></th>
+        <td><%= f.password_field :password, class: "form-input" %></td>
+      </tr>
+      <tr>
+        <th><%= f.label :password_confirmation, "確認用パスワード" %></th>
+        <td><%= f.password_field :password_confirmation, class: "form-input" %></td>
+      </tr>
+    </table>
+
+    <div class="form-actions">
+      <ul>
+        <li><%= f.submit "編集完了する", class: "btn btn-primary" %></li>
+        <li><%= link_to "ユーザー情報ページに戻る", users_path, class: "btn btn-outline" %></li>
+      </ul>
+    </div>
+  <% end %>
+</div>

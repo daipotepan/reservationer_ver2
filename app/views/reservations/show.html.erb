@@ -1,0 +1,39 @@
+
+
+<h3>予約ページ一覧</h3>
+
+
+
+<table class="styled-table">
+  <thead>
+    <tr>
+      <th>施設画像</th>
+      <th>施設名</th>
+      <th>紹介文</th>
+      <th>合計料金</th>
+      <th>チェックイン日</th>
+      <th>チェックアウト日</th>
+      <th>予約確定日時</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% if @room %>
+      <tr>
+        <% img_src = @room.room_img.to_s.strip.presence ||
+          "https://rails-02-sample.herokuapp.com/assets/room/default-image-4e0ac6b8d01335b5b22fe6586af13644ae51dddb6aeabf35b9174e80f13cd09d.png" %>
+
+        <td class="img-cell">
+          <%= tag.img src: img_src, alt: @room.name, class: "facility-image" %>
+        </td>
+
+        <td><%= @room.name %></td>
+        <td class="truncate-intro"><%= @room.introduction %></td>
+        <td>¥<%= number_with_delimiter(@reservation.total_payment_amount) %></td>
+        <td><%= @reservation.checkin_date.to_fs(:date_jp) %></td>
+        <td><%= @reservation.checkout_date.to_fs(:date_jp) %></td>
+        <td><%= @reservation.created_at.to_fs(:datetime_jp) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
