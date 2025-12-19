@@ -36,10 +36,9 @@ ActiveRecord::Schema[7.2].define(version: 2025_12_14_064401) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.string "password"
-    t.string "conf_password"
+    t.string "name", null: false
+    t.string "email", null: false
+    t.string "password_digest", null: false
     t.string "icon", default: "https://rails-02-sample.herokuapp.com/assets/common/default-avatar-7a6cbfd7993e89f24bfc888f4a035a83c6f1428b8bdc47eed9095f2799a40153.png"
     t.string "introduction"
     t.datetime "created_at", null: false

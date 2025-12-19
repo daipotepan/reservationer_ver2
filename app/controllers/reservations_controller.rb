@@ -26,31 +26,43 @@ class ReservationsController < ApplicationController
   def new
     @reservation = Reservation.new
 
-    if params[:room_id].present?
-      @room = Room.find(params[:room_id])
-    else
-      redirect_to rooms_path, alert: "予約する施設が選択されていません。"
+    unless params[:room_id].present?
+      redirect_to rooms_path, alert: "予約する施設が選択されていません。" and return
+    end
+
+    @room = Room.find_by(id: params[:room_id])
+
+    unless @room
+      redirect_to rooms_path, alert: "対象の施設が見つかりませんでした。" and return
     end
   end
+
 
   def conf
     @reservation = Reservation.new(reservation_params)
 
-    room_id = params[:room_id].presence || reservation_params[:room_id]
+    room_id = params[:room_id]
     @room = Room.find_by(id: room_id)
 
     unless @room
-      redirect_to new_reservation_path(room_id: room_id), alert: "対象の施設が見つかりませんでした。" and return
+      redirect_to rooms_path, alert: "施設が見つかりません"
+      return
     end
 
-    # 宿泊日数（チェックアウト - チェックイン）
-    @stay_days =
-      (@reservation.checkout_date - @reservation.checkin_date).to_i
+    @reservation.room = @room
+    @reservation.user_id = session[:id]
 
-    # 合計金額 = 宿泊料金 × 宿泊日数 × 人数
-    @total_payment_amount =
-      @room.payment_amount * @stay_days * @reservation.number_of_people
+    # 🔴 バリデーション実行
+    unless @reservation.valid?
+      flash.now[:alert] = "入力内容に誤りがあります"
+      render :new, status: :unprocessable_entity
+      return
+    end
+
+    @stay_days = @reservation.stay_days
+    @total_payment_amount = @reservation.total_payment_amount
   end
+
 
   def create
     @reservation = Reservation.new(reservation_params)

@@ -1,4 +1,3 @@
-<%= render "shared/current_user" %>
 
 <%= render "shared/search_address" %>
 <%= render "shared/search_room_info" %>
@@ -24,7 +23,7 @@
           <% img_src = room.room_img.to_s.strip.presence || "https://rails-02-sample.herokuapp.com/assets/room/default-image-4e0ac6b8d01335b5b22fe6586af13644ae51dddb6aeabf35b9174e80f13cd09d.png" %>
           <td class="img-cell"><%= tag.img src: img_src, alt: room.name, class: "facility-image" %></td>
           <td><%= room.name %></td>
-          <td><%= room.introduction %></td>
+          <td class="truncate-intro"><%= room.introduction %></td>
           <td><%= room.address %></td>
           <td><%= room.payment_amount %></td>
           <td>

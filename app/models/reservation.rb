@@ -4,13 +4,14 @@ class Reservation < ApplicationRecord
 
   validates :checkin_date, presence: true
   validates :checkout_date, presence: true
-  validates :number_of_people, presence: true,
-                               numericality: { greater_than: 0 }
+  validates :number_of_people,
+            presence: true,
+            numericality: { greater_than: 0 }
 
   validate :checkout_after_checkin
 
   def stay_days
-    return 0 unless checkin_date && checkout_date
+    return 0 if checkin_date.blank? || checkout_date.blank?
     (checkout_date - checkin_date).to_i
   end
 

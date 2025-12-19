@@ -1,0 +1,62 @@
+<div class="card" style="max-width:420px;margin:32px auto;">
+  <h3 class="page-title">ユーザー情報</h3>
+  <table class="form-table" style="width:100%;margin-bottom:0;">
+    <tr>
+      <th style="width:38%;padding-right:18px;">名前</th>
+      <td style="padding-left:18px;vertical-align:middle;"><%= @user.name %></td>
+    </tr>
+    <tr>
+      <th style="width:38%;padding-right:18px;">自己紹介</th>
+      <td style="padding-left:18px;vertical-align:middle;">
+        <% if @user.introduction.present? %>
+          <%= simple_format(@user.introduction) %>
+        <% else %>
+          <span class="muted">自己紹介は未登録です</span>
+        <% end %>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="card" style="max-width:700px;margin:32px auto;">
+  <h3 class="page-title">予約した施設一覧</h3>
+  <% if @reservations.present? && @reservations.any? %>
+    <div class="rooms-table-wrapper" style="overflow-x:auto;">
+      <table class="styled-table rooms-table" style="min-width:900px;">
+        <thead>
+          <tr>
+            <th style="min-width:100px;white-space:normal;">施設画像</th>
+            <th style="min-width:120px;white-space:normal;">施設名</th>
+            <th style="min-width:110px;white-space:normal;">宿泊料金</th>
+            <th style="min-width:70px;white-space:normal;">人数</th>
+            <th style="min-width:90px;white-space:normal;">宿泊日数</th>
+            <th style="min-width:120px;white-space:normal;">合計金額</th>
+            <th style="min-width:140px;white-space:normal;">チェックイン日</th>
+            <th style="min-width:140px;white-space:normal;">チェックアウト日</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @reservations.each do |reservation| %>
+            <% room = reservation.room %>
+            <% next unless room %>
+            <tr>
+              <td class="img-cell">
+                <% img_src = room.room_img.to_s.strip.presence || "https://rails-02-sample.herokuapp.com/assets/room/default-image-4e0ac6b8d01335b5b22fe6586af13644ae51dddb6aeabf35b9174e80f13cd09d.png" %>
+                <%= tag.img src: img_src, alt: room.name, class: "facility-image" %>
+              </td>
+              <td class="name"><%= room.name %></td>
+              <td class="price">¥<%= number_with_delimiter(room.payment_amount) %></td>
+              <td class="people"><%= reservation.number_of_people %>人</td>
+              <td class="days"><%= reservation.stay_days %>泊</td>
+              <td class="total">¥<%= number_with_delimiter(reservation.total_payment_amount) %></td>
+              <td><%= reservation.checkin_date.to_fs(:date_jp) %></td>
+              <td><%= reservation.checkout_date.to_fs(:date_jp) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <div class="muted" style="padding:16px;">予約した施設はありません。</div>
+  <% end %>
+</div>

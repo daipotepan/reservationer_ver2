@@ -1,19 +1,15 @@
 class User < ApplicationRecord
+  has_secure_password
 
-  
   validates :name, presence: true
-  validates :email, presence: true
-  validates :password, presence: true
-  validates :conf_password, presence: true
+  validates :email, presence: true, uniqueness: true
 
-  validate :password_not_iq
+  validates :password,
+            presence: true,
+            confirmation: true,
+            length: { minimum: 6 }
 
-  def password_not_iq
-    return if password.blank? || conf_password.blank?
-    if password != conf_password
-      errors.add("パスワードが一致しません")
-    end
-  end
+  validates :password_confirmation, presence: true
 
   has_many :rooms, dependent: :nullify
   has_many :reservations

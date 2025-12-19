@@ -1,29 +1,26 @@
-<%= render "shared/current_user" %>
+<h3 class="page-title">ユーザー情報</h3>
 
-<h3>ユーザー情報一覧</h3>
-
-
-
-<table>
-  <thead>
-    <tr>
-      <th>メールアドレス</th>
-      <th>パスワード</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% if @user.present? %>
+<div class="card">
+  <table class="info-table">
+    <thead>
       <tr>
-        <td><%= @user.email %></td>
-        <td><%= "*" * (@user.password.to_s.length) %></td>
+        <th>メールアドレス</th>
+        <th>パスワード</th>
       </tr>
-    <% else %>
-      <tr>
-        <td colspan="2">ログインしていません</td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% if @user.present? %>
+        <tr>
+          <td><%= @user.email %></td>
+          <td class="password-mask">********</td>
+        </tr>
+      <% else %>
+        <tr>
+          <td colspan="2" class="not-logged-in">ログインしていません</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
-<p><%= link_to "宿登録はこちら", new_room_path %></p>
+

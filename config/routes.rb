@@ -1,11 +1,16 @@
 Rails.application.routes.draw do
+  # GET /logout でトップページにリダイレクト（404防止・UX向上）
+  get '/logout', to: redirect('/'), as: nil
   root "reservations#index"
+
+  delete '/logout', to: 'users#logout', as: :logout
+
 
   resources :users do
     collection do
       get :login
       post :login
-      delete :logout
+
       get :edit_account
       patch :update_account
       get :edit_profile

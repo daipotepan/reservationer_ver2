@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-  before_action :set_room, only: [:show, :update]
+  before_action :set_room, only: [:show, :edit, :update]
 
   def index
     user = User.find_by(id: session[:id])

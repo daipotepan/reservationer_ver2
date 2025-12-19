@@ -1,4 +1,4 @@
-<%= render "shared/current_user" %>
+
 
 <h3>予約ページ一覧</h3>
 
@@ -28,7 +28,7 @@
         </td>
 
         <td><%= @room.name %></td>
-        <td><%= @room.introduction %></td>
+        <td class="truncate-intro"><%= @room.introduction %></td>
         <td>¥<%= number_with_delimiter(@reservation.total_payment_amount) %></td>
         <td><%= @reservation.checkin_date.to_fs(:date_jp) %></td>
         <td><%= @reservation.checkout_date.to_fs(:date_jp) %></td>
