@@ -63,14 +63,14 @@ class UsersController < ApplicationController
 
   def update_account
     @user = User.find_by(id: session[:id])
-
     permitted = params.require(:user).permit(:email, :password, :password_confirmation)
-    # パスワード変更時は確認用必須
-    if permitted[:password].present? && permitted[:password_confirmation].blank?
-      @user.errors.add(:password_confirmation, "を入力してください")
-      flash[:alert] = "確認用パスワードを入力してください。"
-      render :edit_account, status: :unprocessable_entity and return
+
+    # パスワードが空なら削除して更新
+    if permitted[:password].blank? && permitted[:password_confirmation].blank?
+      permitted.delete(:password)
+      permitted.delete(:password_confirmation)
     end
+
     if @user.update(permitted)
       flash[:notice] = "アカウントの編集に成功しました。"
       redirect_to users_path
@@ -79,6 +79,7 @@ class UsersController < ApplicationController
       render :edit_account, status: :unprocessable_entity
     end
   end
+
 
   def update_profile
     @user = User.find_by(id: session[:id])
